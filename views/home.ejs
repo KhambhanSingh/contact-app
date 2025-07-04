@@ -28,7 +28,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <% var count = 1 %>
+                      <% var count = counter %>
                       <% contacts.forEach(contact => { %>
                         <tr>
                           <td><%= count++ %></td>
@@ -45,6 +45,22 @@
                       <% }); %>
                     </tbody>
                   </table> 
+                  <nav>
+                    <ul class="pagination justify-content-center">
+                      <% let disableClassPrevious = hasPrevPage? "" : "disabled";%> 
+                      <% let disableClassNext = hasNextPage? "" : "disabled";%> 
+                      <li class="page-item <%= disableClassPrevious %>">
+                        <a class="page-link" href="/?page=<%= prevPage %>">Previous</a>
+                      </li>
+                      <% for (let i = 1; i <= totalPages; i++) { %>
+                      <% let activePage = (i == currentPage)? "active" : "";%>
+                        <li class="page-item <%= activePage %>"><a class="page-link" href="/?page=<%= i %>"><%= i %></a></li>
+                      <% } %> 
+                      <li class="page-item <%= disableClassNext %>">
+                        <a class="page-link" href="/?page=<%= nextPage %>">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
                 <% } %>
               </div>
             </div>
